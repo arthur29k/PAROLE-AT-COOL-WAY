@@ -1,6 +1,6 @@
 script_author("arthur29k")
 script_name("УДО по крутому")
-script_version("beta")
+script_version("RC for prod 1")
 
 local inicfg = require "inicfg"
 require "kurmanin.kys"
@@ -43,7 +43,11 @@ function main()
         thisScript():reload()
     end)
     sampRegisterChatCommand("parole_help", function ()
-        sampShowDialog(12101, "label", "text", "left_button_name", "right_button_name", style)
+        sampShowDialog(12101, "УДО ПО КРУТОМУ | Помощь", "{ffffff}«Пасибочки, что используете скрипт, мне очень приятно :3», сказал arthur29k.\n\nВот для вас команды:\n/fuckoff и /comeback - выключить/перезапустить скрипт\n"..
+        "/parole - меню настроек скрипта\n"..
+        "/getjail ID - Получить сумму по удо для заключённого\n"..
+        "/unpunish [ID] [SUMM] - Освободить заключённого по удо\n"..
+        "/jinfo - Оповещение о проведении УДО", "Ок", nil, 0)
     end)
     sampRegisterChatCommand("parole", function ()
         local rpd_color
@@ -122,6 +126,47 @@ function main()
             end
         else
             sampSendChat("/getjail "..arg)
+        end
+        end)
+    end)
+
+    sampRegisterChatCommand("unpunish", function (arg)
+        if not arg:match("(%d+) (%d+)") then
+            sampAddChatMessage(nameTag.."Используйте: /unpunish [ID игрока] [Сумма УДО]", msgcolor)
+            do return end
+        end
+        local id, summ = arg:match("(%d+) (%d+)")
+        local result, hped = sampGetCharHandleBySampPlayerId(id)
+        if not result then
+            sampAddChatMessage(nameTag.."Не удалось получить hped игрока, перепроверьте введённый ID", msgcolor)
+            do return end
+        end
+        local playerX, playerY, playerZ = getCharCoordinates(PLAYER_PED)
+        local argX, argY, argZ = getCharCoordinates(hped)
+        sampAddChatMessage(tostring(getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ)), -1)
+        if getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ) > 5 then
+            sampAddChatMessage(nameTag.."Вы слишком далеко от игрока!", msgcolor)
+            do return end
+        end
+        lua_thread.create(function ()
+        if ini.preferences.rp_dialogs then
+            if ini.preferences.female then
+                sampSendChat("/me открыла базу данных, начала проверять информацию о заключённом")
+                wait(2100)
+                sampSendChat("/me достала бланк инвойса и заполнила информацию")
+                wait(2100)
+                sampSendChat("/todo Распишитесь вот здесь, пожалуйста*передавая инвойс человеку")
+                wait(1500)
+                sampSendChat("/unpunish "..id.." "..summ)
+            else
+                sampSendChat("/me открыл базу данных, начал проверять информацию о заключённом")
+                wait(2100)
+                sampSendChat("/me достал бланк инвойса и заполнил информацию")
+                wait(2100)
+                sampSendChat("/todo Распишитесь вот здесь, пожалуйста*передавая инвойс человеку")
+                wait(1500)
+                sampSendChat("/unpunish "..id.." "..summ)
+            end
         end
         end)
     end)
