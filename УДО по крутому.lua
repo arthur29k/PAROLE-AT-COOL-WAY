@@ -1,6 +1,6 @@
 script_author("arthur29k")
 script_name("УДО по крутому")
-script_version("RC for prod 1")
+script_version("1.0")
 
 local inicfg = require "inicfg"
 require "kurmanin.kys"
