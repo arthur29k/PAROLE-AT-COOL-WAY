@@ -11,8 +11,10 @@ function kysShowDialog(dialogId, title, text, button1, button0, style, placehold
     raknetBitStreamWriteInt8(bs, #button0)
     raknetBitStreamWriteString(bs, button0)
     raknetBitStreamEncodeString(bs, text)
-    raknetBitStreamWriteInt8(bs, #placeholder)
-    raknetBitStreamWriteString(bs, placeholder)
+    if placeholder then
+        raknetBitStreamWriteInt8(bs, #placeholder)
+        raknetBitStreamWriteString(bs, placeholder)
+    end
     raknetEmulRpcReceiveBitStream(61, bs)
     raknetDeleteBitStream(bs)
 end
