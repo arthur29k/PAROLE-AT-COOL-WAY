@@ -1,6 +1,6 @@
 script_author("arthur29k")
 script_name("УДО по крутому")
-script_version("1.0")
+script_version("1.0.1")
 
 local inicfg = require "inicfg"
 require "kurmanin.kys"
@@ -100,7 +100,7 @@ function main()
         end
         local playerX, playerY, playerZ = getCharCoordinates(PLAYER_PED)
         local argX, argY, argZ = getCharCoordinates(hped)
-        sampAddChatMessage(tostring(getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ)), -1)
+        --sampAddChatMessage(tostring(getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ)), -1) --test
         if getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ) > 5 then
             sampAddChatMessage(nameTag.."Вы слишком далеко от игрока!", msgcolor)
             do return end
@@ -143,7 +143,7 @@ function main()
         end
         local playerX, playerY, playerZ = getCharCoordinates(PLAYER_PED)
         local argX, argY, argZ = getCharCoordinates(hped)
-        sampAddChatMessage(tostring(getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ)), -1)
+        --sampAddChatMessage(tostring(getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ)), -1) --test
         if getDistanceBetweenCoords3d(playerX,playerY,playerZ,argX,argY,argZ) > 5 then
             sampAddChatMessage(nameTag.."Вы слишком далеко от игрока!", msgcolor)
             do return end
