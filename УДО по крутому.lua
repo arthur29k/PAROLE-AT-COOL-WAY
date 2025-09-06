@@ -1,6 +1,6 @@
 script_author("arthur29k")
 script_name("УДО по крутому")
-script_version("1.0.1")
+script_version("1.0.2")
 
 local inicfg = require "inicfg"
 require "kurmanin.kys"
@@ -188,9 +188,30 @@ moneyMenu = function ()
     sampShowDialog(12002, "УДО ПО КРУТОМУ | Расценки", "{ffffff}Здесь должно быть крутое меню настройки расценок, \nно в данной версии этот функционал не реализован 3:\nВ случае, если расценки поменяют, а автор не допилит это, то меняйте расценки через конфиг :/", "Эхх...", nil, 0)
     do return end
     sampShowDialog(12002, "УДО ПО КРУТОМУ | Расценки",
-    "Кол-во заданий\tСумма за УДО\tПроцент на казну(Авто)\n\
-    < 50\t",
-    "Выбрать", "Отмена", 5)
+    "<=50\t"..tostring(ini.money.min50).."\tИзменить\n"..
+    "51-100\t"..tostring(ini.money.more51).."\tИзменить\n"..
+    "101-150\t"..tostring(ini.money.more101).."\tИзменить\n"..
+    "151-200\t"..tostring(ini.money.more151).."\tИзменить\n"..
+    "201-250\t"..tostring(ini.money.more201).."\tИзменить\n"..
+    "251-300\t"..tostring(ini.money.more251).."\tИзменить\n"..
+    "301-350\t"..tostring(ini.money.more301).."\tИзменить\n"..
+    "351-400\t"..tostring(ini.money.more351).."\tИзменить\n"..
+    "401-450\t"..tostring(ini.money.more401).."\tИзменить\n"..
+    "451-500\t"..tostring(ini.money.more451).."\tИзменить\n"..
+    "501-550\t"..tostring(ini.money.more501).."\tИзменить",
+    "Выбрать", "Отмена", 4)
+    lua_thread.create(function ()
+    while true do
+        wait(0)
+        local result, button, list, input = sampHasDialogRespond(12002)
+        if result then
+            if button == 1 then
+                if list == 0 then
+            end
+            break
+        end
+    end
+    end)
 end
 
 doSomeMath = function (arg) --int На_Казну, int общий_ценник_УДО = doSomeMath(arg(кол-во работ))
@@ -209,27 +230,27 @@ doSomeMath = function (arg) --int На_Казну, int общий_ценник_УДО = doSomeMath(ar
         treasury = ini.money.more101/100*26
         return treasury, costure
     elseif arg <= 200 then
-        costure = ini.money.more201
+        costure = ini.money.more151
         treasury = ini.money.more201/100*26
         return treasury, costure
     elseif arg <= 250 then
-        costure = ini.money.more251
+        costure = ini.money.more201
         treasury = ini.money.more251/100*26
         return treasury, costure
     elseif arg <= 300 then
-        costure = ini.money.more301
+        costure = ini.money.more251
         treasury = ini.money.more301/100*26
         return treasury, costure
     elseif arg <= 350 then
-        costure = ini.money.more351
+        costure = ini.money.more301
         treasury = ini.money.more351/100*26
         return treasury, costure
     elseif arg <= 400 then
-        costure = ini.money.more401
+        costure = ini.money.more351
         treasury = ini.money.more401/100*26
         return treasury, costure
     elseif arg <= 450 then
-        costure = ini.money.more451
+        costure = ini.money.more401
         treasury = ini.money.more451/100*26
         return treasury, costure
     elseif arg <= 500 then
