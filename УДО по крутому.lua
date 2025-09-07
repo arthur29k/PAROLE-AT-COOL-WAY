@@ -231,27 +231,27 @@ doSomeMath = function (arg) --int На_Казну, int общий_ценник_УДО = doSomeMath(ar
         return treasury, costure
     elseif arg <= 200 then
         costure = ini.money.more151
-        treasury = ini.money.more201/100*26
+        treasury = ini.money.more151/100*26
         return treasury, costure
     elseif arg <= 250 then
         costure = ini.money.more201
-        treasury = ini.money.more251/100*26
+        treasury = ini.money.more201/100*26
         return treasury, costure
     elseif arg <= 300 then
         costure = ini.money.more251
-        treasury = ini.money.more301/100*26
+        treasury = ini.money.more251/100*26
         return treasury, costure
     elseif arg <= 350 then
         costure = ini.money.more301
-        treasury = ini.money.more351/100*26
+        treasury = ini.money.more301/100*26
         return treasury, costure
     elseif arg <= 400 then
         costure = ini.money.more351
-        treasury = ini.money.more401/100*26
+        treasury = ini.money.more351/100*26
         return treasury, costure
     elseif arg <= 450 then
         costure = ini.money.more401
-        treasury = ini.money.more451/100*26
+        treasury = ini.money.more401/100*26
         return treasury, costure
     elseif arg <= 500 then
         costure = ini.money.more451
